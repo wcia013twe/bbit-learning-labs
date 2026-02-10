@@ -19,14 +19,16 @@ class mqConsumer(mqConsumerInterface):
         exchange = channel.exchange_declare(exchange=self.exchange_name)
 
         # Declare the queue
-        channel.queue_declare(queue="Queue Name")
+        channel.queue_declare(queue=self.queue_name)
 
+        # bind the binding key to the queue on the exchange
         channel.queue_bind(
-        queue= "Queue Name",
-        routing_key= "Routing Key",
-        exchange="Exchange Name",
+        queue= self.queue_name,
+        routing_key= self.binding_key,
+        exchange=self.exchange_name,
 )
-        channel.basic_consume("Queue Name", Function Name, auto_ack=False)
+        channel.basic_consume(self.name, Function Name, auto_ack=False)
+        
 
     def on_message_callback(self, channel, method_frame, header_frame, body) -> None:
         pass
