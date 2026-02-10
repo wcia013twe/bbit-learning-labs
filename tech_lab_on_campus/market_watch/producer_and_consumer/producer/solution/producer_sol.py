@@ -23,4 +23,7 @@ class mqProducer(mqProducerInterface):
             body=message
         )
         print("Successfully sent the message")
+        self.channel.close()
+        self.connection.close()
+
     
